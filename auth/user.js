@@ -1,32 +1,6 @@
-import { getUser, signOutUser, getProfiles } from '../fetch-utils.js';
-import { renderProfile } from '../render-utils.js';
+import { getUser, signOutUser, getProfile } from '../fetch-utils.js';
 
 const signOutLink = document.getElementById('sign-out-link');
-const profileList = document.getElementById('profile-list');
-
-let error = null;
-let profiles = [];
-
-window.addEventListener('load', async () => {
-    const response = await getProfiles();
-    error = response.error;
-    profiles = response.data;
-
-    if (error) {
-        console.log(error);
-    }
-    if (profiles) {
-        displayProfiles();
-    }
-});
-
-async function displayProfiles() {
-    const user = getUser();
-    for (const profile of profiles) {
-        const profileEl = renderProfile(profile, user.id);
-        profileList.append(profileEl);
-    }
-}
 
 // make sure we have a user!
 const user = getUser();
@@ -41,4 +15,24 @@ if (!user) {
     );
 }
 
+let error = null;
+let profile = [];
+
 signOutLink.addEventListener('click', signOutUser);
+
+window.addEventListener('load', async () => {
+    const response = await getProfile(user.id);
+    error = response.error;
+    profile = response.data;
+
+    if (error) {
+        // eslint-disable-next-line no-console
+        console.log(error);
+        return;
+    }
+    if (profile) {
+        displayProfile();
+    }
+});
+
+async function displayProfile() {}
