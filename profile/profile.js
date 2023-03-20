@@ -1,6 +1,10 @@
 import '../auth/user.js';
 // > Part A: import updateProfile from fetch-utils.js
-import { updateProfile, getUser, getProfile } from '../fetch-utils.js';
+import {
+    updateProfile,
+    getUser,
+    getProfile,
+} from '../fetch-utils.js';
 // > Part B: import getUser and getProfile from fetch-utils.js
 
 // > Part B: get the user
@@ -55,7 +59,6 @@ profileForm.addEventListener('submit', async (e) => {
     };
     //      - call updateProfile passing in profile update object, capture the response
     const response = await updateProfile(profileUpdate);
-    // ??????
 
     error = response.error;
 
